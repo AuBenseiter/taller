@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from PIL import Image, ImageTk
 
 from App.Controllers.ingeniero_controller import IngenieroController
 from App.Controllers.supervisor_controller import SupervisorController
@@ -12,7 +13,20 @@ class InicioView(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Pantalla de Inicio")
-        self.geometry("400x200")
+        self.geometry("400x500")
+
+        #self.iconbitmap("DG.ico")
+
+        self.image = Image.open("disiture_logo.png")
+        self.photo = ImageTk.PhotoImage(self.image)
+        self.logoLabel = tk.Label(self, image=self.photo)  # Corregir esta línea
+        self.logoLabel.pack()
+
+        self.image2 = Image.open("garege_logo.png")
+        self.photo2 = ImageTk.PhotoImage(self.image2)
+        self.logoLabel = tk.Label(self, image=self.photo2)  # Corregir esta línea
+        self.logoLabel.pack()
+
 
         self.label = tk.Label(self, text="Seleccione su rol:")
         self.label.pack(pady=20)

@@ -1,11 +1,15 @@
 import tkinter as tk
 from tkinter import simpledialog, messagebox
 
+
+
 class LoginView(tk.Tk):
     def __init__(self, verificar_callback):
         super().__init__()
         self.title("Inicio de Sesión")
         self.geometry("400x200")
+
+        #self.iconbitmap("DG.ico")
 
         self.label = tk.Label(self, text="Ingrese sus credenciales:")
         self.label.pack(pady=20)
