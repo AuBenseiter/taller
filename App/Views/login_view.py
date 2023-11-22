@@ -9,7 +9,7 @@ class LoginView(tk.Tk):
         self.title("Inicio de Sesión")
         self.geometry("400x200")
 
-        #self.iconbitmap("DG.ico")
+        self.iconbitmap("DG.ico")
 
         self.label = tk.Label(self, text="Ingrese sus credenciales:")
         self.label.pack(pady=20)

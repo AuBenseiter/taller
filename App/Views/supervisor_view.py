@@ -35,9 +35,3 @@ class SupervisorView(tk.Toplevel):
 
         ag_trb_window = AgendarTrabajos()
         ag_trb_window.mainloop()
-
-
-
-
-
-

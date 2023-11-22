@@ -15,7 +15,7 @@ class InicioView(tk.Tk):
         self.title("Pantalla de Inicio")
         self.geometry("400x500")
 
-        #self.iconbitmap("DG.ico")
+        self.iconbitmap("DG.ico")
 
         self.image = Image.open("disiture_logo.png")
         self.photo = ImageTk.PhotoImage(self.image)

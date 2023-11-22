@@ -6,7 +6,7 @@ class AgendarTrabajos(tk.Tk):
         super().__init__()
         self.title("Sistema de Agendamiento de Trabajos")
         self.config(bg='#F0F0F0', width=480, height=500)
-        #self.iconbitmap("DG.ico")
+        self.iconbitmap("DG.ico")
 
         self.marca_label = tk.Label(self, text="Marca:")
         self.marca_entry = tk.Entry(self)
@@ -41,21 +41,22 @@ class AgendarTrabajos(tk.Tk):
         self.tipo_trabajo_label = tk.Label(self, text="Tipo de Trabajo:")
         self.tipo_trabajo_label.grid(row=5, column=0)
 
-
+        self.comentarios_label = tk.Label(self, text="Comentarios:")
+        self.comentarios_label.grid(row=6, column=0)
+        # Crear entrada de texto multi-línea para comentarios
+        self.comentarios_text = tk.Text(self, width=30, height=5)
+        self.comentarios_text.grid(row=6, column=1)
 
 
 
 
         # Crear lista para mostrar trabajos agendados
-        self.lista_trabajos = tk.Listbox(self, width=80, height=10)
-        self.lista_trabajos.grid(row=9, column=0, columnspan=2)
+        self.lista_trabajos = tk.Listbox(self, width=180, height=10)
+        self.lista_trabajos.grid(row=9, column=0, columnspan=3)
         # Colocar elementos en la ventana
 
 
-        self.comentarios_label = tk.Label(self, text="Comentarios:")
-        self.comentarios_label.grid(row=6, column=0)
-        # Crear entrada de texto multi-línea para comentarios
-        self.comentarios_text = tk.Text(self, width=30, height=5)
+
 
 
         def agregar_trabajo():
@@ -74,7 +75,7 @@ class AgendarTrabajos(tk.Tk):
             tiempo_estimado = next(
                 (trabajo["tiempo_estimado"] for trabajo in self.tipos_de_trabajo if trabajo["nombre"] == tipo_trabajo), "")
 
-            trabajo = f"Marca: {marca}, Modelo: {modelo}, Año: {ano}, Patente: {patente}, Nombre Cliente: {nombre_cliente}, Tipo Trabajo: {tipo_trabajo}, Tiempo Estimado: {tiempo_estimado}, Comentarios: {comentarios}, Fecha: {fecha}"
+            trabajo = f"Marca: {marca}, Modelo: {modelo}, Año: {ano}, Patente: {patente}, Nombre Cliente: {nombre_cliente}, Tipo Trabajo: {tipo_trabajo}, Tiempo Estimado: {tiempo_estimado}, Comentarios: {comentarios}, Fecha ejecución: {fecha}"
             self.lista_trabajos.insert(tk.END, trabajo)
 
             # Puedes agregar la lógica para guardar el trabajo en la base de datos aquí
