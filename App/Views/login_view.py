@@ -1,36 +1,55 @@
-import tkinter as tk
-from tkinter import simpledialog, messagebox
+import time
 
-class LoginView(tk.Tk):
-    def __init__(self, verificar_callback):
-        super().__init__()
-        self.title("Inicio de Sesión")
-        self.geometry("400x200")
+from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5.QtWidgets import QDialog
 
-        self.label = tk.Label(self, text="Ingrese sus credenciales:")
-        self.label.pack(pady=20)
+from App.Controllers.login_controller import LoginController
+from App.Sevices.login_service import LoginService
 
-        self.username = ""
-        self.password = ""
 
-        tk.Label(self, text="Usuario:").pack()
-        self.username_entry = tk.Entry(self)
-        self.username_entry.pack()
+class LoginView(QDialog,QtWidgets.QWidget):
+    def __init__(self, parent=None, callback=None):
+        super(LoginView, self).__init__(parent)
 
-        tk.Label(self, text="Contraseña:").pack()
-        self.password_entry = tk.Entry(self, show="*")
-        self.password_entry.pack()
+        self.setWindowTitle("Inicio de Sesión")
+        self.setGeometry(100, 100, 400, 200)
 
-        self.verificar_callback = verificar_callback
+        layout = QtWidgets.QVBoxLayout()
 
-        tk.Button(self, text="Iniciar Sesión", command=self.login).pack(pady=20)
+        self.label_username = QtWidgets.QLabel("Usuario:")
+        self.edit_username = QtWidgets.QLineEdit(self)
 
-    def login(self):
-        self.username = self.username_entry.get()
-        self.password = self.password_entry.get()
+        self.label_password = QtWidgets.QLabel("Contraseña:")
+        self.edit_password = QtWidgets.QLineEdit(self)
+        self.edit_password.setEchoMode(QtWidgets.QLineEdit.Password)
 
-        if self.username and self.password:
-            self.verificar_callback(self.username, self.password)
-            self.destroy()
+        self.button_login = QtWidgets.QPushButton("Iniciar Sesión", self)
+        self.button_login.clicked.connect(self.iniciar_sesion)
+
+        layout.addWidget(self.label_username)
+        layout.addWidget(self.edit_username)
+        layout.addWidget(self.label_password)
+        layout.addWidget(self.edit_password)
+        layout.addWidget(self.button_login)
+
+        self.setLayout(layout)
+
+        # Almacenar el callback proporcionado
+        self.callback = callback
+
+    def iniciar_sesion(self):
+        # Llamar al controlador para iniciar sesión
+        username = self.edit_username.text()
+        password = self.edit_password.text()
+        inicio: str = "Inicio de sesión."
+        inicio_exitoso: str = "Inicio de sesión exitoso."
+        time.sleep(1)
+        print("Llamando a LoginController")
+        time.sleep(1)
+        if LoginController.iniciar_sesion(username, password):
+            QtWidgets.QMessageBox.information(self, inicio, inicio_exitoso)
+            # Llamar al callback si está definido
+            if self.callback:
+                self.callback()
         else:
-            messagebox.showerror("Error", "Credenciales requeridas")
+            QtWidgets.QMessageBox.warning(self, inicio, inicio_exitoso)
