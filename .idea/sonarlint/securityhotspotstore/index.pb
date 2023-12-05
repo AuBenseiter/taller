@@ -28,3 +28,9 @@ I
 App/Models/login_model.py,5\c\5c70e25e52f039b55ddc6e29513054d54231adcd
 L
 App/Sevices/login_service.py,f\2\f298a4d756b6ed9ea762dc9be7adac1d06a9b5b6
+I
+App/Views/options_view.py,5\d\5df5265429ac9a7681d762aacbadb0757bc48f24
+L
+App/Views/calendario_view.py,8\2\8244fa911633fcd59a3735e3ecbd155af8ff703f
+I
+App/Views/tecnico_view.py,3\6\365d9103ad82ba41fa0c0805a6aaf1a5f18ef575

@@ -8,7 +8,6 @@ from App.Views.login_view import LoginView
 from App.Views.supervisor_view import SupervisorView
 from App.Views.tecnico_view import TecnicoView
 
-
 class ManagerView(QDialog):
     def setupUi(self, option_manager):
         option_manager.setObjectName("Dialog")
@@ -117,6 +116,7 @@ class ManagerView(QDialog):
         try:
             print("llamando a la vista de login")
             time.sleep(1)
+            #QtCore.QTimer.singleShot(1000, self.mostrar_ingeneria_post_login)
             self.login_view = LoginView(None, self.mostrar_ingeneria_post_login)
             self.login_view.setModal(True)
             self.login_view.finished.connect(self.login_view.close)
@@ -146,20 +146,30 @@ class ManagerView(QDialog):
             print(f"Error en mostrar_supervisor: {str(e)}")
 
     def mostrar_ingeneria_post_login(self):
-        ingeniero_dialog = IngenieroView(self)
-        ingeniero_dialog.setupUi(ingeniero_dialog)
-        ingeniero_dialog.exec_()
-        self.login_view.close()  # Cerrar la ventana de login  # Cerrar la ventana de login
+        try:
+            ingeniero_dialog = IngenieroView()
+            ingeniero_dialog.setupUi(ingeniero_dialog)
+            ingeniero_dialog.exec_()
+            super().close()  # Cerrar la ventana de login (usando super)
+            self.login_view.close()  # Cerrar la ventana de login (no es necesario, pero es una buena práctica)
+        except Exception as e:
+            print(f"Error en mostrar_ingeneria_post_login: {str(e)}")
 
     def mostrar_tecnico_post_login(self):
-        tecnico_view = TecnicoView(self)
-        tecnico_view.exec_()
-        self.close()  # Cerrar la ventana de login
+        try:
+            tecnico_view = TecnicoView(self)
+            tecnico_view.exec_()
+            self.close()  # Cerrar la ventana de login
+        except Exception as e:
+            print(f"Error en mostrar_tecnico_post_login: {str(e)}")
 
     def mostrar_supervisor_post_login(self):
-        supervisor_view = SupervisorView(self)
-        supervisor_view.exec_()
-        self.close()  # Cerrar la ventana de login
+        try:
+            supervisor_view = SupervisorView(self)
+            supervisor_view.exec_()
+            self.close()  # Cerrar la ventana de login
+        except Exception as e:
+            print(f"Error en mostrar_supervisor_post_login: {str(e)}")
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -169,3 +179,4 @@ class ManagerView(QDialog):
         self.supervisor.setText(_translate("Dialog", "Supervisor"))
         self.tecnico.setText(_translate("Dialog", "Tecnico"))
         self.salir.setText(_translate("Dialog", "SALIR"))
+

@@ -1,45 +1,46 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from App.Views.options_view import option_view
+
 class IngenieroView(QtWidgets.QDialog):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(966, 835)
-        self.calendarWidget = QtWidgets.QCalendarWidget(Dialog)
-        self.calendarWidget.setGeometry(QtCore.QRect(80, 90, 801, 271))
-        self.calendarWidget.setObjectName("calendarWidget")
-        self.listWidget = QtWidgets.QListWidget(Dialog)
-        self.listWidget.setGeometry(QtCore.QRect(80, 490, 801, 241))
-        self.listWidget.setObjectName("listWidget")
-        self.pushButton = QtWidgets.QPushButton(Dialog)
-        self.pushButton.setGeometry(QtCore.QRect(630, 750, 251, 31))
-        self.pushButton.setStyleSheet("border-radius: 15px;\n"
-"background-color:rgb(137, 206, 206);\n"
-"color: white;\n"
-"font: 16px;")
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton_2 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_2.setGeometry(QtCore.QRect(700, 410, 161, 51))
-        self.pushButton_2.setStyleSheet("border-radius: 20px;\n"
-"background-color:rgb(137, 206, 206);\n"
-"color: white;\n"
-"font: 16px;")
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.label = QtWidgets.QLabel(Dialog)
-        self.label.setEnabled(True)
-        self.label.setGeometry(QtCore.QRect(180, 10, 631, 61))
-        self.label.setStyleSheet("font-size: 24pt;\n"
-"background: rgb(0, 0, 127);\n"
-"color: rgb(255, 255, 255);\n"
-"border: 1px solid;")
-        self.label.setScaledContents(False)
-        self.label.setAlignment(QtCore.Qt.AlignCenter)
-        self.label.setObjectName("label")
+    def __init__(self):
+        super().__init__()
+        self.setupUi()
 
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+    def setupUi(self, *args, **kwargs):
+        try:
+            # Tu código de inicialización de la interfaz aquí
 
-    def retranslateUi(self, Dialog):
-        _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.pushButton.setText(_translate("Dialog", "Guardar Cambios"))
-        self.pushButton_2.setText(_translate("Dialog", "Añadir Nueva Tarea"))
-        self.label.setText(_translate("Dialog", "TAREAS"))
+            # Crear una instancia de OptionView
+            self.option_view_instance = option_view()
+            # Llamar a la función setupUi de option_view
+            self.option_view_instance.setupUi(self)
+
+            # Ahora puedes acceder a los elementos de option_view como atributos de self.option_view_instance
+            self.option_view_instance.pushButton.clicked.connect(self.ingresar_trabajo)
+            self.option_view_instance.pushButton_2.clicked.connect(self.mostrar_bodega)
+            self.option_view_instance.pushButton_3.clicked.connect(self.agregar_usuario)
+        except Exception as e:
+            print(f"Error en setupUi de IngenieroView: {str(e)}")
+
+    def ingresar_trabajo(self):
+        try:
+            print("Botón 'Ingresar Trabajo' presionado")
+            # Aquí va el código para 'Ingresar Trabajo'
+        except Exception as e:
+            print(f"Error al procesar 'Ingresar Trabajo': {str(e)}")
+
+    def mostrar_bodega(self):
+        try:
+            print("Botón 'Bodega' presionado")
+            # Aquí va el código para 'Mostrar Bodega'
+        except Exception as e:
+            print(f"Error al procesar 'Mostrar Bodega': {str(e)}")
+
+    def agregar_usuario(self):
+        try:
+            print("Botón 'Agregar Usuario' presionado")
+            # Aquí va el código para 'Agregar Usuario'
+        except Exception as e:
+            print(f"Error al procesar 'Agregar Usuario': {str(e)}")
+
+    # Otros métodos y funciones según sea necesario
