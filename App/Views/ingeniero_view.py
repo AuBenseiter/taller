@@ -1,4 +1,8 @@
+import time
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
+from App.Views.calendario_view import CalendarioView
 from App.Views.options_view import option_view
 
 class IngenieroView(QtWidgets.QDialog):
@@ -25,7 +29,12 @@ class IngenieroView(QtWidgets.QDialog):
     def ingresar_trabajo(self):
         try:
             print("Botón 'Ingresar Trabajo' presionado")
-            # Aquí va el código para 'Ingresar Trabajo'
+            time.sleep(1)
+            print("Llamando a CalendarioView")
+            time.sleep(1)
+            calendario_dialog = CalendarioView()
+            calendario_dialog.setupUi(calendario_dialog)  # Asegúrate de llamar a setupUi
+            calendario_dialog.exec_()
         except Exception as e:
             print(f"Error al procesar 'Ingresar Trabajo': {str(e)}")
 
